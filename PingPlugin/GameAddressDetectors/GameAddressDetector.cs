@@ -7,5 +7,7 @@ namespace PingPlugin.GameAddressDetectors
         protected IPAddress Address { get; set; }
 
         public abstract IPAddress GetAddress(bool verbose = false);
+
+        public int CurrentPort = 54992;
     }
 }

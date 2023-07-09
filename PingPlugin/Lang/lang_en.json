@@ -15,6 +15,10 @@
     "message": "Game packets",
     "description": "PingPlugin.Kind"
   },
+  "PingTrackerKindPsPing": {
+    "message": "PsPing",
+    "description": "PingPlugin.Kind"
+  },
   "ClickThrough": {
     "message": "Click through plugin windows",
     "description": "PingPlugin.Configuration"

@@ -13,6 +13,7 @@ namespace PingPlugin.PingTrackers
         private const string COMTrackerKey = "COM";
         private const string IpHlpApiTrackerKey = "IpHlpApi";
         private const string PacketTrackerKey = "Packets";
+        private const string PsPingTrackerKey = "PsPing";
 
         private readonly IDictionary<string, TrackerInfo> trackerInfos;
         private readonly DecisionTree<string> decisionTree;
@@ -24,6 +25,7 @@ namespace PingPlugin.PingTrackers
             // Define trackers
             this.trackerInfos = new Dictionary<string, TrackerInfo>();
 
+            RegisterTracker(PsPingTrackerKey, new PsPingPingTracker(config, addressDetector) { Verbose = false });
             RegisterTracker(COMTrackerKey, new ComponentModelPingTracker(config, addressDetector) { Verbose = false });
             RegisterTracker(IpHlpApiTrackerKey, new IpHlpApiPingTracker(config, addressDetector) { Verbose = false });
             RegisterTracker(PacketTrackerKey, new PacketPingTracker(config, addressDetector, network) { Verbose = false });
@@ -32,8 +34,8 @@ namespace PingPlugin.PingTrackers
             this.decisionTree = new DecisionTree<string>(
                 // If COM is errored
                 () => TrackerIsErrored(COMTrackerKey),
-                // Just use IpHlpApi
-                pass: new DecisionTree<string>(() => TreeResult.Resolve(IpHlpApiTrackerKey)),
+                // Just use PsPing
+                pass: new DecisionTree<string>(() => TreeResult.Resolve(PsPingTrackerKey)),
                 fail: new DecisionTree<string>(
                     // If difference between pings is more than 30
                     () => Math.Abs((long)GetTrackerRTT(COMTrackerKey) - (long)GetTrackerRTT(IpHlpApiTrackerKey)) > 30,

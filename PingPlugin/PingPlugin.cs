@@ -69,6 +69,7 @@ namespace PingPlugin
                 PingTrackerKind.COM => new ComponentModelPingTracker(this.config, this.addressDetector),
                 PingTrackerKind.IpHlpApi => new IpHlpApiPingTracker(this.config, this.addressDetector),
                 PingTrackerKind.Packets => new PacketPingTracker(this.config, this.addressDetector, this.network),
+                PingTrackerKind.PsPing => new PsPingPingTracker(this.config, this.addressDetector),
                 _ => throw new ArgumentOutOfRangeException(nameof(kind)),
             };
 

@@ -9,6 +9,7 @@ namespace PingPlugin.PingTrackers
         COM,
         IpHlpApi,
         Packets,
+        PsPing,
     }
 
     public static class PingTrackerKindExtensions
@@ -21,6 +22,7 @@ namespace PingPlugin.PingTrackers
                 PingTrackerKind.COM => Loc.Localize("PingTrackerKindCOM", string.Empty),
                 PingTrackerKind.IpHlpApi => Loc.Localize("PingTrackerKindWin32API", string.Empty),
                 PingTrackerKind.Packets => Loc.Localize("PingTrackerKindPackets", string.Empty),
+                PingTrackerKind.PsPing => Loc.Localize("PingTrackerKindPsPing", string.Empty),
                 _ => throw new ArgumentOutOfRangeException(nameof(kind)),
             };
         }
